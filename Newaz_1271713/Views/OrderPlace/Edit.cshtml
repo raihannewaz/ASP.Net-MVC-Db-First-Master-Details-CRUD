@@ -1,0 +1,43 @@
+﻿@model Newaz_1271713.Models.ViewModels.CustomerOrderVM
+
+@using (Html.BeginForm("Edit", "OrderPlace", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Customers.CustomerID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customers.CustomerName)
+        @Html.TextBoxFor(model => model.Customers.CustomerName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customers.CustomerAddress)
+        @Html.TextBoxFor(model => model.Customers.CustomerAddress, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customers.ImagePath)
+        @Html.TextBoxFor(model => model.Customers.ImagePath, new { @class = "form-control", type="file" })
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order No</th>
+                <th>Order Date</th>
+                <th>Order Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@Html.TextBoxFor(model => order.OrderNo, new { @class = "form-control" })</td>
+                    <td>@Html.EditorFor(model => order.OrderDate, new { @class = "form-control" })</td>
+                    <td>@Html.EditorFor(model => order.OrderStatus)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
